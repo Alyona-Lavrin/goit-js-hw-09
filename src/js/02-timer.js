@@ -1,4 +1,5 @@
 import flatpickr from "flatpickr";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const datePickerElement = document.getElementById("datetime-picker");
 const startButton = document.querySelector("[data-start]");
@@ -29,7 +30,7 @@ const options = {
         });
       }
     } else {
-      window.alert("Please choose a date in the future");
+      Notify.failure('Please choose a date in the future');
       startButton.disabled = true;
     }
   },
