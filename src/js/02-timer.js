@@ -37,6 +37,7 @@ const options = {
 };
 
 function setTime() {
+  datePickerElement.disabled = true;
   const currentTime = new Date();
   const selectedDate = new Date(localStorage.getItem("date"));
   const countdownTime = selectedDate - currentTime;

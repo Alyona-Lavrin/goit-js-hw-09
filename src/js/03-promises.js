@@ -42,6 +42,6 @@ const submitHandler = e => {
     delayInp += stepInp;
   }
 
-//   e.currentTarget.reset();
+  e.currentTarget.reset();
 };
 formEl.addEventListener('submit', submitHandler);
