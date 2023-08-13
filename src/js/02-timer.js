@@ -22,8 +22,14 @@ const options = {
 
     if (selectedDate > new Date()) {
       startButton.disabled = false;
-    } 
-    else {
+      if (startButton.getAttribute('listener') !== 'true') {
+        startButton.addEventListener('click', function (e) {
+          const elementClicked = e.target;
+          elementClicked.setAttribute('listener', 'true');
+          setTime();
+        });
+      }
+    } else {
       Notify.failure('Please choose a date in the future');
       startButton.disabled = true;
     }
