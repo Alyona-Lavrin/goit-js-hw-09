@@ -17,18 +17,8 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     clearInterval(interval);
-    const selectedDate = selectedDates[0];
-    localStorage.setItem("date", selectedDate);
-
-    if (selectedDate > new Date()) {
+    if (selectedDates[0] > new Date()) {
       startButton.disabled = false;
-      if (startButton.getAttribute('listener') !== 'true') {
-        startButton.addEventListener('click', function (e) {
-          const elementClicked = e.target;
-          elementClicked.setAttribute('listener', 'true');
-          setTime();
-        });
-      }
     } else {
       Notify.failure('Please choose a date in the future');
       startButton.disabled = true;
@@ -36,17 +26,21 @@ const options = {
   },
 };
 
+startButton.addEventListener('click', function (e) {
+  setTime();
+});
+
+const datePicker = flatpickr(datePickerElement, options);
+
 function setTime() {
   datePickerElement.disabled = true;
   const currentTime = new Date();
-  const selectedDate = new Date(localStorage.getItem("date"));
+  const selectedDate = datePicker.selectedDates[0];
   const countdownTime = selectedDate - currentTime;
 
   startButton.disabled = true; 
   startCountdown(countdownTime);
 }
-
-flatpickr(datePickerElement, options);
 
 function convertMs(ms) {
   const second = 1000;
